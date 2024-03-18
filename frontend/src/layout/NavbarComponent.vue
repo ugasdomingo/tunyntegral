@@ -10,12 +10,8 @@ const links = [
         url: '/'
     },
     {
-        name: 'About',
-        url: '/about'
-    },
-    {
-        name: 'Contact',
-        url: '/contact'
+        name: 'Conócenos',
+        url: '/conocenos'
     }
 ];
 

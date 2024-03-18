@@ -43,8 +43,8 @@
         gap: 2rem;
         padding: 0 4rem;
         box-sizing: border-box;
-        background-color: rgba(255, 255, 255, 0);
-        backdrop-filter: blur(1px);
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4px);
 
         h1 {
             margin-bottom: 1rem;
@@ -69,7 +69,7 @@
                 transition: 0.3s;
                 cursor: pointer;
                 &:hover {
-                    background-color: var(--color-primary);
+                    background-color: var(--color-secondary);
                 }
             }
         }

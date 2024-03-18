@@ -1,20 +1,34 @@
 <script setup lang="ts">
-const lastsWorks: any = [];
+//Import tools
+import { useWorkStore } from '@/stores/works-store';
+import { onBeforeMount } from 'vue';
+
+const workStore = useWorkStore();
+
+//Get works
+onBeforeMount(() => {
+    workStore.getWorks();
+});
 </script>
 
 <template>
     <section class="portfolio">
         <h2>Conoce nuestros últimos trabajos</h2>
         <div class="gallery">
-            <div class="gallery-item" v-for="work in lastsWorks" :key="work.id">
-                <img :src="work.image" :alt="work.title" />
-                <div class="gallery-item-info">
-                    <h3>{{ work.title }}</h3>
-                    <p>{{ work.description }}</p>
-                </div>
+            <div
+                class="gallery-item"
+                v-for="work in workStore.allWorks"
+                :key="work._id"
+            >
+                <img
+                    :src="
+                        'https://res.cloudinary.com/minteados/image/upload/v1709589779/' +
+                        work.coverImage.public_id
+                    "
+                    :alt="work.title"
+                />
             </div>
         </div>
-        <RouterLink to="/servicios">Ver todos los servicios</RouterLink>
     </section>
 </template>
 
@@ -22,6 +36,9 @@ const lastsWorks: any = [];
 .portfolio {
     padding: 4rem;
     text-align: center;
+    position: relative;
+    box-sizing: border-box;
+
     h2 {
         margin-bottom: 3rem;
     }
@@ -32,50 +49,39 @@ const lastsWorks: any = [];
         flex-wrap: wrap;
         margin: 2rem 0;
         .gallery-item {
-            width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 250px;
             height: 250px;
             position: relative;
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 0.5rem;
 
             img {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
+                width: 98%;
+                height: 98%;
                 object-fit: cover;
-                border-radius: 10px;
-            }
-            .gallery-item-info {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: center;
-                background-color: rgba(0, 0, 0, 0.5);
-                border-radius: 10px;
-                color: white;
-                h2 {
-                    margin-bottom: 1rem;
-                }
-                p {
-                    background-color: rgba(0, 0, 0, 0.5);
-                    backdrop-filter: blur(4px);
-                }
+                border-radius: 0.5rem;
+                border: 1px solid var(--color-secondary);
             }
         }
     }
+}
 
-    a {
-        padding: 1rem 2rem;
-        background-color: #f5a623;
-        border: none;
-        color: white;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: 0.3s;
-        &:hover {
-            background-color: #f7b732;
+@media screen and (max-width: 768px) {
+    .portfolio {
+        padding: 2rem;
+        h2 {
+            margin-bottom: 2rem;
+        }
+        .gallery {
+            gap: 1rem;
+            .gallery-item {
+                width: 100%;
+                height: 250px;
+            }
         }
     }
 }

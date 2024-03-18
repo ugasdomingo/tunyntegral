@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser';
 import authRouter from './src/routes/authRouter';
 import serviceRouter from './src/routes/serviceRouter';
 import quoteRouter from './src/routes/quoteRouter';
+import workRouter from './src/routes/workRouter';
 
 //Define app
 const app = express();
@@ -41,6 +42,7 @@ app.use(cookieParser());
 app.use('/v1/api/', authRouter);
 app.use('/v1/api/services', serviceRouter);
 app.use('/v1/api/quotes', quoteRouter);
+app.use('/v1/api/works', workRouter);
 
 //Export app
 export default app;

@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { IService } from '@/interfaces/interfaces';
 import { defineProps, PropType } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const soomething = (id: string) => {
+    router.push('/servicios/' + id);
+};
 
 defineProps({
     services: {
@@ -23,11 +30,12 @@ defineProps({
                         service.coverImage.public_id
                     "
                     :alt="service.name"
+                    @click="soomething(service._id)"
                 />
-                <div class="gallery-item-info">
+                <div class="gallery-item-info horizontal-gradient">
                     <h3>{{ service.name }}</h3>
                 </div>
-                <div>
+                <div class="action-buttons">
                     <RouterLink :to="'/servicios/' + service._id">
                         Ver más
                     </RouterLink>
@@ -54,30 +62,91 @@ defineProps({
         margin: 2rem 0;
         .gallery-item {
             width: 300px;
-            height: 250px;
+            height: 350px;
             position: relative;
 
             img {
                 position: absolute;
                 top: 0;
                 left: 0;
-                width: 100%;
-                height: 100%;
+                width: 300px;
+                height: 300px;
                 object-fit: cover;
                 border-radius: 10px;
+                cursor: pointer;
             }
             .gallery-item-info {
                 width: 100%;
-                height: 100%;
+                height: 2.5rem;
                 display: flex;
-                flex-direction: column;
-                justify-content: space-between;
+                justify-content: left;
                 align-items: center;
-                background-color: rgba(0, 0, 0, 0.5);
-                border-radius: 10px;
-                color: white;
-                h2 {
-                    margin-bottom: 1rem;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: transparent;
+                color: var(--color-white);
+                border-radius: 0.5rem 0 0.5rem 0;
+
+                h3 {
+                    font-size: 1.5rem;
+                    padding: 0.5rem;
+                    margin: 0;
+                }
+            }
+            .action-buttons {
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                gap: 0.5rem;
+                padding: 0;
+                position: absolute;
+                bottom: 0;
+
+                a {
+                    width: 40%;
+                    padding: 0.5rem 1rem;
+                    border: none;
+                    border-radius: 0.5rem;
+                    background-color: var(--color-secondary);
+                    color: var(--color-white);
+                    cursor: pointer;
+                    text-decoration: none;
+                    transition: transform 0.3s;
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    .gallery-services {
+        padding: 0;
+        h2 {
+            margin-bottom: 2rem;
+        }
+        .gallery {
+            flex-direction: column;
+            gap: 1.5rem;
+            .gallery-item {
+                width: 100%;
+                img {
+                    width: 100%;
+                    height: 300px;
+                }
+                .gallery-item-info {
+                    width: 100%;
+                    h3 {
+                        font-size: 1.5rem;
+                    }
+                }
+                .action-buttons {
+                    width: 100%;
+                    a {
+                        width: 100%;
+                    }
                 }
             }
         }

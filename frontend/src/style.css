@@ -52,6 +52,12 @@ h3 {
     font-size: 2rem;
 }
 
+p {
+    line-height: 1.75;
+    font-size: 1.25rem;
+    letter-spacing: 0.1rem;
+}
+
 .page {
     width: 100%;
     min-height: 100vh;
@@ -60,4 +66,28 @@ h3 {
     margin: 0;
     position: relative;
     font-size: 1.25rem;
+}
+
+.horizontal-gradient {
+    background: linear-gradient(to right, rgb(4, 73, 109, 0.9) 90% , rgba(255, 163, 163, 0)100%);
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .page {
+        padding: 6rem 2rem 2rem;
+    }
+    h1 {
+        font-size: 3.5rem;
+    }
+    h2 {
+        font-size: 2.5rem;
+    }
+    h3 {
+        font-size: 1.5rem;
+    }
+    p {
+        font-size: 1.25rem;
+    }
 }

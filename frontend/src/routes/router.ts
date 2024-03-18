@@ -26,6 +26,11 @@ const routes = [
         path: '/servicios/:id',
         name: 'Servicio',
         component: () => import('../views/OneServiceView.vue')
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: () => import('../views/NotFoundView.vue')
     }
 ];
 
